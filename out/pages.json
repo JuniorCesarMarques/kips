@@ -1,0 +1,85 @@
+[
+  {
+    "duration": 5000,
+    "levels": [
+      {
+        "comps": [
+          {
+            "type": "image",
+            "width": 900,
+            "height": null,
+            "url": "https://yazaki.sharepoint.com/sites/ymintranet/BMI/_layouts/15/embed.aspx?UniqueId=c1a7d52d-49af-4401-b98d-941f9e2b63b3"
+          }
+        ]
+      },
+      {
+        "comps": [
+          {
+            "type": "text",
+            "title": {
+              "content": "Relatório de KPIs",
+              "size": 60
+            },
+            "description": {
+              "content": "BTC - BRAZIL TECHINICAL CENTER",
+              "size": 25
+            },
+            "width": 100,
+            "url": "https://yazaki.sharepoint.com/sites/ymintranet/BMI/_layouts/15/embed.aspx?UniqueId=c1a7d52d-49af-4401-b98d-941f9e2b63b3",
+            "height": null
+          }
+        ]
+      },
+      {
+        "comps": [
+          {
+            "type": "image",
+            "width": 432,
+            "height": 500,
+            "url": "https://yazaki.sharepoint.com/sites/ymintranet/BMI/_layouts/15/embed.aspx?UniqueId=81bbb32f-6a94-4535-aba8-808432a2e791"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "duration": 3000,
+    "levels": [
+      {
+        "comps": [
+          {
+            "type": "text",
+            "title": {
+              "content": "SURPLUS Report",
+              "size": 35
+            },
+            "description": {
+              "content": "Set/25",
+              "size": 35
+            }
+          }
+        ]
+      },
+      {
+        "comps": [
+          {
+            "type": "image",
+            "width": 1500,
+            "height": 400,
+            "url": "https://yazaki.sharepoint.com/sites/ymintranet/BMI/_layouts/15/embed.aspx?UniqueId=8664087b-3167-41b8-969e-80c120169406"
+          }
+        ]
+      },
+      {
+        "comps": [
+          {
+            "type": "image",
+            "width": 1500,
+            "height": null,
+            "url": "https://yazaki.sharepoint.com/sites/ymintranet/BMI/_layouts/15/embed.aspx?UniqueId=d77e080c-ef37-4b11-a34a-7c97e428663d"
+          }
+        ]
+      }
+    ]
+  }
+]
