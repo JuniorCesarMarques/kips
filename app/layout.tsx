@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 
 // Context
 import { EditProvider } from "@/app/context/EditContext";
+import { TargetProvider } from "@/app/context/TargetContext";
 
 // Ant Design
 import "@ant-design/v5-patch-for-react-19";
@@ -40,11 +41,13 @@ export default function RootLayout({
         <PagesProvider>
           <EditProvider>
             <IndexProvider>
-              <Navbar />
-              <div className="min-h-[calc(100vh-38px)] flex flex-col">
-                {children}
-              </div>
-              <Footer />
+              <TargetProvider>
+                <Navbar />
+                <div className="min-h-[calc(100vh-38px)] flex flex-col">
+                  {children}
+                </div>
+                <Footer />
+              </TargetProvider>
             </IndexProvider>
           </EditProvider>
         </PagesProvider>

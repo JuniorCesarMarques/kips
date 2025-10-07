@@ -5,7 +5,7 @@ type Text = {
 
 export type Comp = {
   id: number
-  type: "chart" | "video" | "text" | "image"
+  type?: "chart" | "video" | "text" | "image"
   url?: string
   width?: number
   height?: number
@@ -22,6 +22,7 @@ export type Level = {
 
 export interface Page {
   id: number
+  done: boolean
   duration: number
   levels: Level[]
 }

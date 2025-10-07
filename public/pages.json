@@ -1,13 +1,14 @@
 [
   {
-    "id": 1,
+    "id": 0,
+    "done": true,
     "duration": 5000,
     "levels": [
       {
-        "id": 1,
+        "id": 0,
         "comps": [
           {
-            "id": 1,
+            "id": 0,
             "type": "image",
             "width": 900,
             "height": null,
@@ -16,10 +17,10 @@
         ]
       },
       {
-        "id": 2,
+        "id": 1,
         "comps": [
           {
-            "id": 2,
+            "id": 1,
             "type": "text",
             "title": {
               "content": "Relatório de KPIs",
@@ -36,10 +37,10 @@
         ]
       },
       {
-        "id": 3,
+        "id": 2,
         "comps": [
           {
-            "id": 3,
+            "id": 2,
             "type": "image",
             "width": 432,
             "height": 500,
@@ -50,14 +51,15 @@
     ]
   },
   {
-    "id": 2,
+    "id": 1,
+    "done": true,
     "duration": 3000,
     "levels": [
       {
         "id": 4,
         "comps": [
           {
-            "id": 4,
+            "id": 3,
             "type": "text",
             "title": {
               "content": "SURPLUS Report",
@@ -74,7 +76,7 @@
         "id": 5,
         "comps": [
           {
-            "id": 5,
+            "id": 4,
             "type": "image",
             "width": 1500,
             "height": 400,

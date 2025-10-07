@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { usePage } from "@/app/context/PagesContext";
 
 import { useIndex } from "@/app/context/IndexContext";
@@ -31,7 +31,6 @@ export default function MainScreen() {
     return () => clearTimeout(timer);
   }, [currentIndex, edit, pages, setCurrentIndex]);
 
-  console.log("Pagina atual", currentIndex);
 
   return (
     <>
