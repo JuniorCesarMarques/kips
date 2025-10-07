@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useState, useContext } from "react";
+import { createContext, ReactNode, useState, useContext, useEffect } from "react";
 import { Page } from "@/types";
 
 // Tipo atualizado
@@ -15,6 +15,12 @@ const PagesContext = createContext<PageContextType | undefined>(undefined);
 // Provider
 export function PagesProvider({ children }: { children: ReactNode }) {
   const [pages, setPages] = useState<Page[]>([]);
+
+    useEffect(() => {
+      fetch("/pages.json")
+        .then((res) => res.json())
+        .then((data) => setPages(data));
+    }, [setPages]);
 
   return (
     <PagesContext.Provider value={{ pages, setPages }}>

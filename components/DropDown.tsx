@@ -1,25 +1,24 @@
 import React from 'react';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
-import { PlusSquareOutlined } from '@ant-design/icons';
 
 const items: MenuProps['items'] = [
   {
-    key: '1',
     label: (
-      <span>Adicionar elemento</span>
+      <p>Salvar</p>
     ),
+    key: '0',
   },
 ];
 
-const DropDown: React.FC = () => (
-  <Space direction="vertical">
-    <Space wrap>
-      <Dropdown menu={{ items }} placement="bottomLeft">
-        <PlusSquareOutlined className='text-3xl' />
-      </Dropdown>
-    </Space>
-  </Space>
+const App: React.FC = () => (
+  <Dropdown menu={{ items }} trigger={['click']}>
+    <a onClick={(e) => e.preventDefault()}>
+      <Space>
+        Arquivo
+      </Space>
+    </a>
+  </Dropdown>
 );
 
-export default DropDown;
+export default App;
