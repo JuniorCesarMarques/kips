@@ -38,6 +38,7 @@ export default function TextComponent({ comp }: TextComponentProps) {
       {editing?.id === comp.id ? (
         <>
           <input
+            onBlur={() => setEditing(null)}
             className="text-center font-bold"
             style={{ fontSize: `${comp.title?.size || 16}px` }}
             type="text"

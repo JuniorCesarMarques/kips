@@ -43,7 +43,7 @@ export default function RootLayout({
             <IndexProvider>
               <TargetProvider>
                 <Navbar />
-                <div className="min-h-[calc(100vh-38px)] flex flex-col">
+                <div className="pb-[38px] pt-[90px] flex flex-col">
                   {children}
                 </div>
                 <Footer />
