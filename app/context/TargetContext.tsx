@@ -1,22 +1,29 @@
 "use client";
 
-import { createContext, ReactNode, useState, useContext } from "react";
-import { Comp } from "@/types";
+import { createContext, ReactNode, useState, useContext, useEffect } from "react";
+import { Comp, Level, Page } from "@/types";
 
 
 type TargetContextType = {
-  editing: Comp | null;
-  setEditing: React.Dispatch<React.SetStateAction<Comp | null>>;
+  targetPage: Page | null;
+  targetComp: Comp | null;
+  targetLevel: Level | null;
+  setTargetComp: React.Dispatch<React.SetStateAction<Comp | null>>;
+  setTargetLevel: React.Dispatch<React.SetStateAction<Level | null>>;
+  setTargetPage: React.Dispatch<React.SetStateAction<Page | null>>;
 };
 
 const TargetContext = createContext<TargetContextType | null>(null);
 
 export function TargetProvider({ children }: { children: ReactNode }) {
   // Estado de edição pode começar como null
-  const [editing, setEditing] = useState<Comp | null>(null);
+  const [targetComp, setTargetComp] = useState<Comp | null>(null);
+  const [targetLevel, setTargetLevel] = useState<Level | null>(null);
+  const [targetPage, setTargetPage] = useState<Page | null>(null);
+
 
   return (
-    <TargetContext.Provider value={{ editing, setEditing }}>
+    <TargetContext.Provider value={{targetPage, setTargetPage, targetComp, setTargetComp, targetLevel,  setTargetLevel }}>
       {children}
     </TargetContext.Provider>
   );

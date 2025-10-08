@@ -1,6 +1,8 @@
 import { Comp } from "@/types";
 
 import { useTarget } from "@/app/context/TargetContext";
+import { usePage } from "@/app/context/PagesContext";
+import { useState } from "react";
 
 
 type TextComponentProps = {
@@ -8,64 +10,74 @@ type TextComponentProps = {
 };
 
 export default function TextComponent({ comp }: TextComponentProps) {
-  const { editing, setEditing } = useTarget();
+
+  const { targetLevel, targetComp, setTargetComp, setTargetLevel } = useTarget();
+  const { pages, setPages } = usePage();
+  const [selected, setSelected] = useState<number>();
+
+  console.log(targetLevel, "TARGET LEVEL")
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(!editing)return;
-    setEditing({
-      ...editing,
+    if(!targetComp)return;
+    setTargetComp({
+      ...targetComp,
       title: {
-        ...editing.title!,
+        ...targetComp.title!,
         content: e.target.value,
       },
     });
+
+    setPages([...pages, ])
+
   };
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(!editing)return;
-    setEditing({
-      ...editing,
+    if(!targetComp)return;
+    setTargetComp({
+      ...targetComp,
       description: {
-        ...editing.description!,
+        ...targetComp.description!,
         content: e.target.value,
       },
     });
   };
 
+  console.log("EDITING", targetComp)
+
 
   return (
-    <div onClick={() => setEditing(comp)} className="flex flex-col cursor-pointer">
-      {editing?.id === comp.id ? (
+    <div onClick={() => setTargetComp(comp)} className="flex flex-col cursor-pointer">
+      {comp?.id === targetComp?.id ? (
         <>
           <input
-            onBlur={() => setEditing(null)}
             className="text-center font-bold"
-            style={{ fontSize: `${comp.title?.size || 16}px` }}
+            style={{ fontSize: `${comp?.title?.size || 16}px` }}
             type="text"
-            value={editing?.title?.content || ""}
+            value={targetComp?.title?.content}
             onChange={handleTitleChange}
           />
           <input
             className="text-center"
-            style={{ fontSize: `${comp.description?.size || 14}px` }}
+            style={{ fontSize: `${comp?.description?.size || 14}px` }}
             type="text"
-            value={editing?.description?.content || ""}
+            value={targetComp?.description?.content || ""}
             onChange={handleDescriptionChange}
           />
         </>
       ) : (
         <>
           <p
-            style={{ fontSize: `${comp.title?.size || 16}px` }}
-            className="text-center font-bold"
+            onClick={() => setSelected(comp.id)}
+            style={{ fontSize: `${comp?.title?.size || 16}px` }}
+            className={`text-center font-bold`}
           >
-            {comp.title?.content}
+            {comp?.title?.content}
           </p>
           <p
-            style={{ fontSize: `${comp.description?.size || 14}px` }}
+            style={{ fontSize: `${comp?.description?.size || 14}px` }}
             className="text-center"
           >
-            {comp.description?.content}
+            {comp?.description?.content}
           </p>
         </>
       )}

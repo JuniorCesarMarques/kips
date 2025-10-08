@@ -1,6 +1,6 @@
 type Text = {
   content: string
-  size: string
+  size: number
 }
 
 export type Comp = {

@@ -3,6 +3,7 @@ import { useIndex } from "@/app/context/IndexContext";
 import { useState } from "react";
 
 import { MdDeleteOutline } from "react-icons/md";
+import MainScreen from "./MainScreen";
 
 export default function PagesList() {
   const { pages, setPages } = usePage();
@@ -13,6 +14,7 @@ export default function PagesList() {
   const [closeButton, setCloseButton] = useState<number | null>(null);
 
   const handleSelected = (id: number) => {
+    console.log(id)
     setSelected(id);
     setCurrentIndex(id);
   };
@@ -36,6 +38,7 @@ export default function PagesList() {
               key={index}
               onClick={() => handleSelected(page.id)}
             >
+              <MainScreen thumbNail pagesListIndex={page.id}/>
               {closeButton === page.id && (
                 <span className="absolute top-2 right-2">
                   <MdDeleteOutline className="cursor-pointer" size={20} />
@@ -49,19 +52,21 @@ export default function PagesList() {
           .map((page, index) => (
             <div
               key={index}
-               onMouseLeave={() => setCloseButton(null)}
+              onMouseLeave={() => setCloseButton(null)}
               onMouseEnter={() => setCloseButton(page.id)}
               onClick={() => handleSelected(page.id)}
               className={`relative h-50 w-30 border ${
                 page.id === selected && "border-red-500 border-2"
-              } flex justify-center items-center`}
+              } flex justify-center overflow-hidden items-center`}
             >
               {closeButton === page.id && (
                 <span className="absolute top-2 right-2">
                   <MdDeleteOutline className="cursor-pointer" size={20} />
                 </span>
               )}
-              <p>{page.id + 1}</p>
+              <div>
+                <MainScreen thumbNail pagesListIndex={page.id}/>
+              </div>
             </div>
           ))}
       </div>
