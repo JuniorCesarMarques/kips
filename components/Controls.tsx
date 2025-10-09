@@ -10,20 +10,21 @@ import { RiImageAddFill } from "react-icons/ri";
 
 
 import Select from "./TextSizeSelect";
+import { Page } from "@/types";
 
 
 export default function Controls() {
 
     const { pages, setPages } = usePage();
-    const { comp, targetLevel } = useTarget();
+    const { targetComp, targetLevel } = useTarget();
 
     const lastPage = pages[pages.length - 1];
-    const lasTLevel = lastPage?.levels[pages[pages.length -1]?.levels.length - 1]
-    const lastComp = pages[pages.length -1]?.levels[pages[pages.length -1]?.levels.length - 1].comps[pages[pages.length -1]?.levels[pages[pages.length -1]?.levels.length - 1]?.comps.length - 1]
+    const lasTLevel = lastPage?.levels[lastPage?.levels.length - 1]
+    const lastComp = lastPage?.levels[lastPage?.levels.length - 1].comps[lastPage?.levels[lastPage?.levels.length - 1]?.comps.length - 1]
 
 
-    // Página em branco
-const newPage = {
+// Página em branco
+const newPage: Page = {
   id: lastPage?.id + 1,
   done: false,
   duration: 3000,
@@ -33,6 +34,11 @@ const newPage = {
       comps: [
         {
             id: lastComp?.id + 1,
+            type: "",
+            url: "",
+            width: null,
+            height: null,
+            title: {content: "", size: null},
         }
       ] // Nenhum componente por enquanto
     }
@@ -45,7 +51,7 @@ const handleAddText = () => {
   const newTextComp = {
     id: lastComp?.id + 1,
     type: "text",
-    title: { content: comp?.title?.content || "Texto", size: 60 },
+    title: { content: targetComp?.title?.content || "Texto", size: 60 },
   };
 
 
@@ -80,7 +86,7 @@ const handleNewPage = () => {
 
                 {/* Tools */}
                 <div className="flex items-center gap-2">
-                  {comp?.type === "text" && <div>
+                  {targetComp?.type === "text" && <div>
                       <Select />
                   </div>}
                     <div className={`flex gap-1 ${!targetLevel && "opacity-50 pointer-events-none"}`}>

@@ -11,7 +11,7 @@ type TextComponentProps = {
 
 export default function TextComponent({ comp }: TextComponentProps) {
 
-  const { targetLevel, targetComp, setTargetComp, setTargetLevel } = useTarget();
+  const { targetLevel, targetComp, setTargetComp } = useTarget();
   const { pages, setPages } = usePage();
   const [selected, setSelected] = useState<number>();
 
@@ -41,8 +41,6 @@ export default function TextComponent({ comp }: TextComponentProps) {
       },
     });
   };
-
-  console.log("EDITING", targetComp)
 
 
   return (

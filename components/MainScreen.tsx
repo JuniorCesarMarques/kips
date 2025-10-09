@@ -13,12 +13,14 @@ import ImageComponent from "./ImageComponent";
 export default function MainScreen({pagesListIndex, thumbNail}: {pagesListIndex?: number, thumbNail?: boolean}) {
   const { currentIndex, setCurrentIndex } = useIndex();
   const { edit } = useEdit();
-  const { setPages, pages } = usePage();
-  const { targetPage, targetComp, targetLevel, setTargetLevel } = useTarget();
+  const { pages } = usePage();
+  const { targetLevel, setTargetLevel } = useTarget();
 
-  useEffect(() => {
-    setPages(pages.map(page => page.id === targetPage?.id ? targetPage : page))
-  }, [targetComp])
+  const lastPage = pages[pages.length - 1]
+
+  console.log("LAST PAGE", lastPage)
+
+  console.log("TARGET LEVEL", targetLevel)
 
 
   useEffect(() => {
@@ -36,9 +38,6 @@ export default function MainScreen({pagesListIndex, thumbNail}: {pagesListIndex?
 
     return () => clearTimeout(timer);
   }, [currentIndex, edit, pages, setCurrentIndex]);
-
-  console.log(targetComp)
-
 
   return (
     <>

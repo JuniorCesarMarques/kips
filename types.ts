@@ -1,16 +1,14 @@
 type Text = {
   content: string
-  size: number
+  size: number | null
 }
 
 export type Comp = {
   id: number
-  type?: "chart" | "video" | "text" | "image"
-  url?: string
-  width?: number
-  height?: number
-  controls?: boolean
-  autoplay?: boolean
+  type?: "chart" | "video" | "text" | "image" | "";
+  url?: string 
+  width?: number | null
+  height?: number | null
   title?: Text
   description?: Text
 }
