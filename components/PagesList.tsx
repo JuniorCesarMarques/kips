@@ -25,7 +25,7 @@ export default function PagesList() {
 
       <div className="h-full overflow-y-auto p-6 space-y-4">
         {pages
-          .filter((page) => !page.done)
+          .filter((page) => page.status === "empty")
           .slice()
           .reverse()
           .map((page, index) => (
@@ -48,7 +48,7 @@ export default function PagesList() {
           ))}
 
         {pages
-          .filter((page) => page.done)
+          .filter((page) => page.status === "done")
           .map((page, index) => (
             <div
               key={index}

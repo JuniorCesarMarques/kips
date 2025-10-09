@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useState, useContext, useEffect } from "react";
+import { createContext, ReactNode, useState, useContext } from "react";
 import { Comp, Level, Page } from "@/types";
 
 
@@ -16,6 +16,7 @@ type TargetContextType = {
 const TargetContext = createContext<TargetContextType | null>(null);
 
 export function TargetProvider({ children }: { children: ReactNode }) {
+
   // Estado de edição pode começar como null
   const [targetComp, setTargetComp] = useState<Comp | null>(null);
   const [targetLevel, setTargetLevel] = useState<Level | null>(null);

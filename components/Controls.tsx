@@ -3,6 +3,8 @@ import { FileAddOutlined } from "@ant-design/icons";
 
 import { usePage } from "@/app/context/PagesContext";
 import { useTarget } from "@/app/context/TargetContext";
+import { useIndex } from "@/app/context/IndexContext";
+
 import { CiText } from "react-icons/ci";
 import { MdOndemandVideo } from "react-icons/md";
 import { FaRegChartBar } from "react-icons/fa";
@@ -16,7 +18,8 @@ import { Page } from "@/types";
 export default function Controls() {
 
     const { pages, setPages } = usePage();
-    const { targetComp, targetLevel } = useTarget();
+    const { targetComp, targetLevel, targetPage } = useTarget();
+    const {currentIndex} = useIndex();
 
     const lastPage = pages[pages.length - 1];
     const lasTLevel = lastPage?.levels[lastPage?.levels.length - 1]
@@ -26,7 +29,7 @@ export default function Controls() {
 // Página em branco
 const newPage: Page = {
   id: lastPage?.id + 1,
-  done: false,
+  status: "empty",
   duration: 3000,
   levels: [
     {
@@ -44,32 +47,53 @@ const newPage: Page = {
     }
   ]
 };
- 
 
 // Cria o novo componente de texto e seta o estado da página
-const handleAddText = () => {
+ const handleAddText = () => {
+
+  setPages(pages.map((page, pageIndex) => {
+
+    console.log(pageIndex, currentIndex)
+
+    if(pageIndex !== currentIndex) return page;
+
+    return {
+      ...page,
+      status: "editing"
+    }
+  }))
+
+  console.log(pages.length)
+
   const newTextComp = {
     id: lastComp?.id + 1,
     type: "text",
-    title: { content: targetComp?.title?.content || "Texto", size: 60 },
+    title: { content: "Texto", size: 60 },
   };
 
+  const updatedPages = pages.map((page, pageIndex) => {
 
-  // Atualiza o último nível com o novo componente
-  const updatedLevel = {
-    ...lasTLevel,
-    comps: [...lasTLevel.comps, newTextComp],
-  };
+    if (pageIndex !== currentIndex) return page // mantém outras páginas iguais
 
-  // Atualiza a última página com o nível atualizado
-  const updatedPage = {
-    ...lastPage,
-    levels: [...lastPage.levels, updatedLevel],
-  };
+    const updatedLevels = page.levels.map(level => {
+      if (level.id !== targetLevel?.id) return level
 
-  setPages(pages.map(page =>
-    page.id === updatedPage.id ? updatedPage : page
-  ));
+      return {
+        ...level,
+        comps: [...level.comps, newTextComp]
+      }
+    })
+
+    return {
+      ...page,
+      levels: updatedLevels,
+    };
+
+  })
+
+
+
+setPages(updatedPages)
 };
 
 

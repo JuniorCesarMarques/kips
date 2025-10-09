@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "done": true,
+    "status": "done",
     "duration": 5000,
     "levels": [
       {
@@ -52,7 +52,7 @@
   },
   {
     "id": 1,
-    "done": true,
+    "status": "done",
     "duration": 3000,
     "levels": [
       {

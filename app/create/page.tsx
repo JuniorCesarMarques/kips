@@ -1,6 +1,5 @@
 "use client"
 
-import { usePage } from "@/app/context/PagesContext";
 import { useEdit } from "@/app/context/EditContext";
 import Controls from "@/components/Controls";
 import { useEffect } from "react";

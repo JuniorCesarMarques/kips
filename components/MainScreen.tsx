@@ -16,11 +16,9 @@ export default function MainScreen({pagesListIndex, thumbNail}: {pagesListIndex?
   const { pages } = usePage();
   const { targetLevel, setTargetLevel } = useTarget();
 
-  const lastPage = pages[pages.length - 1]
+  const emptyPage = pages[currentIndex]?.status === "empty";
+  const editing = pages[currentIndex]?.status === "editing";
 
-  console.log("LAST PAGE", lastPage)
-
-  console.log("TARGET LEVEL", targetLevel)
 
 
   useEffect(() => {
@@ -39,6 +37,8 @@ export default function MainScreen({pagesListIndex, thumbNail}: {pagesListIndex?
     return () => clearTimeout(timer);
   }, [currentIndex, edit, pages, setCurrentIndex]);
 
+  console.log(editing)
+
   return (
     <>
       <div className={`${thumbNail && "scale-20"} flex flex-col justify-baseline px-4 w-full overflow-hidden h-full flex-1`}>
@@ -46,10 +46,11 @@ export default function MainScreen({pagesListIndex, thumbNail}: {pagesListIndex?
           <div
             onClick={() => setTargetLevel(level)}
             key={index}
-            className={`flex flex-row gap-4 mb-3 ${targetLevel?.id  === level.id && !thumbNail && "border"} justify-center items-center h-full`}
+            className={`flex flex-row gap-4 mb-3 ${targetLevel?.id === level.id && !thumbNail && "border"} justify-center items-center h-full`}
           >
+            {!thumbNail && emptyPage && !editing && <div className="h-[30vh] w-full border flex justify-center items-center text-5xl">Adicione um elemento</div>}
             {level.comps.map((comp, index) => (
-              <div className="flex justify-center" key={index}>
+              <div className="flex justify-center items-baseline" key={index}>
                 {comp.type === "chart" && (
                   <iframe
                     src={comp.url}

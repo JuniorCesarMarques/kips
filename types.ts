@@ -20,7 +20,7 @@ export type Level = {
 
 export interface Page {
   id: number
-  done: boolean
+  status: "empty" | "editing" | "done"
   duration: number
   levels: Level[]
 }
