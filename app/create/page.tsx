@@ -3,7 +3,6 @@
 import { useEdit } from "@/app/context/EditContext";
 import Controls from "@/components/Controls";
 import { useEffect } from "react";
-import Level from "@/components/Level";
 import PagesList from "@/components/PagesList";
 import MainScreen from "@/components/MainScreen";
 
@@ -23,7 +22,6 @@ export default function CreatePage() {
           <PagesList />
           <MainScreen />
         </div>
-        <Level />
     </div>
   );
 }

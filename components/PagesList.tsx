@@ -25,7 +25,7 @@ export default function PagesList() {
 
       <div className="h-full overflow-y-auto p-6 space-y-4">
         {pages
-          .filter((page) => page.status === "empty")
+          .filter((page) => page.status === "empty" || page.status === "editing")
           .slice()
           .reverse()
           .map((page, index) => (

@@ -37,20 +37,28 @@ export default function MainScreen({pagesListIndex, thumbNail}: {pagesListIndex?
     return () => clearTimeout(timer);
   }, [currentIndex, edit, pages, setCurrentIndex]);
 
-  console.log(editing)
 
   return (
     <>
-      <div className={`${thumbNail && "scale-20"} flex flex-col justify-baseline px-4 w-full overflow-hidden h-full flex-1`}>
+      <div onClick={(e) => {
+        if(e.currentTarget === e.target) {
+          setTargetLevel(null)
+          console.log(e.currentTarget)
+        }
+      }} className={`${thumbNail && "scale-20"} flex flex-col justify-baseline px-4 w-full overflow-hidden  flex-1`}>
         {pages[thumbNail ? pagesListIndex as number : currentIndex]?.levels.map((level, index) => (
           <div
-            onClick={() => setTargetLevel(level)}
+              onClick={(e) => {
+              setTargetLevel(level)
+              console.log(e.target, e.currentTarget)
+            }}
             key={index}
-            className={`flex flex-row gap-4 mb-3 ${targetLevel?.id === level.id && !thumbNail && "border"} justify-center items-center h-full`}
+            className={`flex flex-row gap-4 mb-3 ${targetLevel?.id === level.id && !thumbNail && "border"} justify-center items-start h`}
           >
             {!thumbNail && emptyPage && !editing && <div className="h-[30vh] w-full border flex justify-center items-center text-5xl">Adicione um elemento</div>}
             {level.comps.map((comp, index) => (
-              <div className="flex justify-center items-baseline" key={index}>
+            <div             
+              className="flex justify-center items-start" key={index}>
                 {comp.type === "chart" && (
                   <iframe
                     src={comp.url}
@@ -72,9 +80,9 @@ export default function MainScreen({pagesListIndex, thumbNail}: {pagesListIndex?
                     allow="autoplay; encrypted-media"
                   ></iframe>
                 )}
-                {comp.type === "text" && (
-                  <TextComponent comp={comp} />
-                )}
+                  {comp.type === "text" && (
+                    <TextComponent comp={comp} />
+                  )}
               </div>
             ))}
           </div>

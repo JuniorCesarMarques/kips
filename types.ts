@@ -1,5 +1,5 @@
-type Text = {
-  content: string
+export type Text = {
+  content: string | undefined
   size: number | null
 }
 
@@ -10,7 +10,7 @@ export type Comp = {
   width?: number | null
   height?: number | null
   title?: Text
-  description?: Text
+  description?: Text | null
 }
 
 export type Level = {

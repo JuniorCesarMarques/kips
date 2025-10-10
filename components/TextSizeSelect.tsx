@@ -5,52 +5,45 @@ import { useTarget } from "@/app/context/TargetContext";
 import { usePage } from "@/app/context/PagesContext";
 import { useIndex } from "@/app/context/IndexContext";
 
+import { Text } from '@/types';
+
 const App: React.FC = () => {
-  const { editing } = useTarget();
+  const { targetComp, targetLevel} = useTarget();
   const { pages, setPages } = usePage();
   const { currentIndex } = useIndex();
 
   const handleChange = (value: string) => {
-    const currentPage = pages[currentIndex];
 
-    const currentLevel = currentPage.levels.find(level =>
-      level.comps.some(comp => comp.id === editing?.id)
-    );
+    setPages(pages.map((page) => {
+      if(page.id !== pages[currentIndex].id) return page
 
-    if (!currentLevel) return;
+      const updatedLevels = page.levels.map(level => {
+        if(level.id !== targetLevel?.id) return level
 
-    const currentCompIndex = currentLevel.comps.findIndex(comp => comp.id === editing?.id);
-    if (currentCompIndex === -1) return;
 
-    const currentComp = currentLevel.comps[currentCompIndex];
+        const updatedComps = level.comps.map(comp => {
+          if(comp.id !== targetComp?.id) return comp
 
-    // Atualiza o comp com novo tamanho de fonte
-    const updatedComp = {
-      ...currentComp,
-      title: {
-        content: currentComp.title?.content ?? "",
-        size: Number(value),
-      },
-    };
+          return {
+            ...comp,
+            title: {content: (targetComp?.title as Text).content , size: Number(value)}
+          }
+          
+        })
 
-    const updatedComps = [...currentLevel.comps];
-    updatedComps[currentCompIndex] = updatedComp;
+        return {
+          ...level,
+          comps: updatedComps
+        }
 
-    const updatedLevel = { ...currentLevel, comps: updatedComps };
+      })
 
-    const levelIndex = currentPage.levels.findIndex(level =>
-      level.comps.some(comp => comp.id === editing?.id)
-    );
+      return {
+        ...page,
+        levels: updatedLevels
+      }
+    }))
 
-    const updatedLevels = [...currentPage.levels];
-    updatedLevels[levelIndex] = updatedLevel;
-
-    const updatedPage = { ...currentPage, levels: updatedLevels };
-
-    const updatedPages = [...pages];
-    updatedPages[currentIndex] = updatedPage;
-
-    setPages(updatedPages);
   };
 
   return (

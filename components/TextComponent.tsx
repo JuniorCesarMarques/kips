@@ -1,4 +1,4 @@
-import { Comp } from "@/types";
+import { Comp, Text } from "@/types";
 
 import { useTarget } from "@/app/context/TargetContext";
 import { usePage } from "@/app/context/PagesContext";
@@ -65,32 +65,31 @@ setPages(updatedPages)
     });
   };
 
-
+console.log("TARGET LEVEL", targetLevel)
 
   return (
     <div onClick={() => setTargetComp(comp)} className="flex flex-col cursor-pointer self-start">
       {comp?.id === targetComp?.id ? (
-        <>
-          <div className="relative">
+          <div className="relative flex flex-col items-center">
             <input
-              size={targetComp?.title?.content.length || 1}
-              className="text-center font-bold"
+              size={1}
+              className={`${targetLevel && "border"} text-center overflow-auto font-bold`}
               style={{ fontSize: `${comp?.title?.size || 16}px` }}
               type="text"
               value={comp?.title?.content}
               onChange={handleTitleChange}
             />
-          </div>
           <input
-            className="text-center"
+            className="text-center border"
             style={{ fontSize: `${comp?.description?.size || 14}px` }}
             type="text"
-            value={targetComp?.description?.content || ""}
+            placeholder="Subtítulo"
+            value={(targetComp?.description?.content) || ""}
             onChange={handleDescriptionChange}
           />
-        </>
+        </div>
       ) : (
-        <>
+        <div>
           <p
             onClick={() => setSelected(comp.id)}
             style={{ fontSize: `${comp?.title?.size || 16}px` }}
@@ -104,7 +103,7 @@ setPages(updatedPages)
           >
             {comp?.description?.content}
           </p>
-        </>
+        </div>
       )}
     </div>
   );

@@ -13,6 +13,7 @@ import { RiImageAddFill } from "react-icons/ri";
 
 import Select from "./TextSizeSelect";
 import { Page } from "@/types";
+import { Comp } from "@/types";
 
 
 export default function Controls() {
@@ -50,23 +51,12 @@ const newPage: Page = {
 
 // Cria o novo componente de texto e seta o estado da página
  const handleAddText = () => {
-
-  setPages(pages.map((page, pageIndex) => {
-
-    console.log(pageIndex, currentIndex)
-
-    if(pageIndex !== currentIndex) return page;
-
-    return {
-      ...page,
-      status: "editing"
-    }
-  }))
-
-  console.log(pages.length)
-
-  const newTextComp = {
-    id: lastComp?.id + 1,
+  const newTextComp: Comp = {
+    id: (lastComp?.id as number) + 1,
+    url: "",
+    width: null,
+    height: null,
+    description: null,
     type: "text",
     title: { content: "Texto", size: 60 },
   };
@@ -87,15 +77,14 @@ const newPage: Page = {
     return {
       ...page,
       levels: updatedLevels,
+      status: "editing" as const,
     };
 
-  })
+  });
 
+setPages(updatedPages);
 
-
-setPages(updatedPages)
 };
-
 
 
 const handleNewPage = () => {
